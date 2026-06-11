@@ -18,21 +18,21 @@ v Shoptet `<head>` (max 8192 znaků) a úpravy se dělají jen tady, ne v adminu
 V adminu: **Vzhled a obsah → Editor (HTML kódy v hlavičce)** a vlož tyto dva řádky:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/czdsgnr/shoptet-protvoreni@main/shoptet.css">
-<script src="https://cdn.jsdelivr.net/gh/czdsgnr/shoptet-protvoreni@main/shoptet.js" defer></script>
+<link rel="stylesheet" href="https://czdsgnr.github.io/shoptet-protvoreni/shoptet.css">
+<script src="https://czdsgnr.github.io/shoptet-protvoreni/shoptet.js" defer></script>
 ```
 
-Pak smaž z hlavičky všechny staré inline `<style>` a `<script>` (registrace,
-login, quantity, upsell) – jsou teď tady.
+Pak smaž z hlavičky všechny staré inline `<style>` a `<script>` – jsou teď tady
+(včetně původních: Další kategorie menu, akce, ceny, footer, logo, otevírací doba).
 
 ## Aktualizace / cache
 
-jsDelivr cachuje `@main` cca 12 h. Když chceš změnu hned vidět:
+Hostuje se přes **GitHub Pages** – cache jen ~10 min (`max-age=600`), URL je
+permanentní a automaticky servíruje poslední commit na `main`. Po pushi tedy
+stačí počkat max ~10 min (nebo hard refresh `Cmd+Shift+R`), žádný purge netřeba.
 
-- **Verzovaně (doporučeno):** v Shoptetu změň `@main` na konkrétní tag, např.
-  `@v1.0.1`, a po commitu vytvoř git tag se stejným číslem.
-- **Rychlá invalidace:** přidej `?v=2` na konec URL a inkrementuj při každé změně.
-- **Purge:** otevři `https://purge.jsdelivr.net/gh/czdsgnr/shoptet-protvoreni@main/shoptet.css`
+> Pozn.: jsDelivr (`cdn.jsdelivr.net/gh/...@main`) se nepoužívá – cachoval
+> rozlišení branche 12 h a změny se nepropisovaly včas.
 
 ## Konfigurace upsellu
 

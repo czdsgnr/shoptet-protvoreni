@@ -32,6 +32,10 @@
 
   /* === B) Quantity widget na výpisech (jen "Do košíku") ================= */
   function buildQty(card) {
+    // Přeskoč carousely / slidery (homepage "akční zboží", související produkty) –
+    // tam má karta vlastní pozicování a widget by přetékal / rozbil layout.
+    if (card.closest('[class*="homepage-products"], .products-related, .carousel, [data-testid="carousel"], .owl-carousel, .slick-slider, .slick-slide, .swiper, .swiper-slide, .product-slider')) return;
+
     var pTools = card.querySelector('.p-tools');
     if (!pTools || pTools.querySelector('.qty-wrap')) return;
 

@@ -32,10 +32,9 @@
 
   /* === B) Quantity widget na výpisech (jen "Do košíku") ================= */
   function buildQty(card) {
-    // Jen na skutečném výpisu kategorie/vyhledávání (.products-page grid je v HTML
-    // od začátku). Homepage carousely a související slidery (slick) ho nemají –
-    // tím se vyhneme přetékání, slick se navíc inicializuje až po tomto skriptu.
-    if (!card.closest('.products-page')) return;
+    // Ukazuj v náhledech produktů; přeskoč jen homepage carousely / slidery,
+    // kde má slider vlastní pozicování (homepage-products blok je v HTML od začátku).
+    if (card.closest('[class*="homepage-products"], .products-related, .slick-slider, .slick-slide, .swiper, .swiper-slide, .owl-carousel, .product-slider')) return;
 
     var pTools = card.querySelector('.p-tools');
     if (!pTools || pTools.querySelector('.qty-wrap')) return;

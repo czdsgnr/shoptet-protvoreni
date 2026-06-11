@@ -32,10 +32,8 @@
 
   /* === B) Quantity widget na výpisech (jen "Do košíku") ================= */
   function buildQty(card) {
-    // Ukazuj v náhledech produktů; přeskoč jen homepage carousely / slidery,
-    // kde má slider vlastní pozicování (homepage-products blok je v HTML od začátku).
-    if (card.closest('[class*="homepage-products"], .products-related, .slick-slider, .slick-slide, .swiper, .swiper-slide, .owl-carousel, .product-slider')) return;
-
+    // U KAŽDÉHO produktu s přímým "Do košíku" (i v caruselech). Karty bez
+    // add-to-cart formuláře (varianty / "Zobrazit") se přeskočí níže.
     var pTools = card.querySelector('.p-tools');
     if (!pTools || pTools.querySelector('.qty-wrap')) return;
 
@@ -177,6 +175,10 @@
   document.addEventListener('DOMContentLoaded', initAll);
   document.addEventListener('ShoptetDOMContentLoaded', initAll);
   document.addEventListener('ShoptetMessage', initQty);
+  // Slick klonuje slajdy az po nacteni – dobeh, at widget chyti i klony v caruselu
+  window.addEventListener('load', initQty);
+  setTimeout(initQty, 800);
+  setTimeout(initQty, 2000);
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-target="login"]')) {
       setTimeout(buildLoginExtras, 50);

@@ -6,14 +6,14 @@
 
 /* === 1) Registrace – Zákazník / B2B ==================================== */
 /* Cili na .reg-ucet (legacy) i .co-registration (aktualni Shoptet fieldset) */
-.reg-ucet,.co-registration{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;margin:0 0 48px!important;padding:0!important;border:0!important;min-width:0!important;background:0!important;box-shadow:none!important}
-.reg-ucet>h4,.co-registration>h4{grid-column:1/-1!important;margin:0 0 4px!important;font-size:18px!important;font-weight:700!important}
-.reg-ucet>.form-group,.co-registration>.form-group{position:relative!important;display:block!important;min-height:178px!important;margin:0!important;padding:28px 30px 28px 64px!important;border:1px solid #e2e4ea!important;border-radius:12px!important;background:#fff!important;box-shadow:0 4px 16px rgba(0,0,0,.04)!important;overflow:visible!important;cursor:pointer!important;transition:.15s}
-.reg-ucet>.form-group:has(input:checked),.co-registration>.form-group:has(input:checked){border-color:#1d6eea!important;background:#f5f9ff!important;box-shadow:0 0 0 1px #1d6eea inset!important}
-.reg-ucet>.form-group:hover,.co-registration>.form-group:hover{border-color:#b9cffb!important}
-.reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{display:inline-block!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:32px!important;left:30px!important;width:22px!important;height:22px!important;min-width:22px!important;margin:0!important;appearance:auto!important;-webkit-appearance:radio!important;accent-color:#1d6eea!important}
-.reg-ucet label,.co-registration>.form-group label{display:block!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;background:0!important;box-shadow:none!important;font-size:16px!important;line-height:1.55!important;color:#20202a!important;text-align:left!important;text-transform:none!important;cursor:pointer!important}
-.reg-ucet label strong,.co-registration>.form-group label strong{display:block!important;margin:0 0 8px!important;font-size:19px!important;font-weight:700!important}
+.reg-ucet,.co-registration{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;margin:0 0 48px!important;padding:0!important;border:0!important;min-width:0!important;background:0!important;box-shadow:none!important}
+.reg-ucet>h4,.co-registration>h4{grid-column:1/-1!important;margin:0 0 6px!important;font-size:18px!important;font-weight:700!important;color:#16223b!important}
+.reg-ucet>.form-group,.co-registration>.form-group{position:relative!important;display:block!important;box-sizing:border-box!important;min-height:150px!important;margin:0!important;padding:30px 32px 30px 66px!important;border:1px solid #e2e4ea!important;border-radius:14px!important;background:#fff!important;box-shadow:0 4px 16px rgba(0,0,0,.04)!important;overflow:visible!important;cursor:pointer!important;transition:border-color .15s,box-shadow .15s,background .15s!important}
+.reg-ucet>.form-group:has(input:checked),.co-registration>.form-group:has(input:checked){border-color:#1f6fb2!important;background:#f3f8ff!important;box-shadow:0 0 0 1px #1f6fb2 inset,0 6px 20px rgba(31,111,178,.10)!important}
+.reg-ucet>.form-group:hover,.co-registration>.form-group:hover{border-color:#9cc3ee!important;box-shadow:0 6px 20px rgba(31,111,178,.08)!important}
+.reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{display:inline-block!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:31px!important;left:30px!important;width:22px!important;height:22px!important;min-width:22px!important;margin:0!important;appearance:auto!important;-webkit-appearance:radio!important;accent-color:#1f6fb2!important;cursor:pointer!important}
+.reg-ucet label,.co-registration>.form-group label{display:block!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;background:0!important;box-shadow:none!important;font-size:14px!important;line-height:1.6!important;color:#5a6b7e!important;text-align:left!important;text-transform:none!important;cursor:pointer!important}
+.reg-ucet label strong,.co-registration>.form-group label strong{display:block!important;margin:0 0 10px!important;font-size:18px!important;line-height:1.3!important;font-weight:700!important;color:#16223b!important}
 
 /* === 2) Login popup s benefity ========================================= */
 #login.has-benefits{width:min(760px,95vw)!important;max-width:none!important;right:0!important;left:auto!important}
@@ -58,11 +58,11 @@
 
 /* === 5) Mobil ========================================================== */
 @media(max-width:767px){
-  .reg-ucet,.co-registration{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:36px!important}
-  .reg-ucet>.form-group,.co-registration>.form-group{min-height:auto!important;padding:20px 18px 20px 48px!important}
-  .reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{top:22px!important;left:18px!important;width:18px!important;height:18px!important}
+  .reg-ucet,.co-registration{grid-template-columns:1fr!important;gap:14px!important;margin-bottom:36px!important}
+  .reg-ucet>.form-group,.co-registration>.form-group{min-height:auto!important;padding:22px 20px 22px 54px!important}
+  .reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{top:24px!important;left:20px!important;width:20px!important;height:20px!important;min-width:20px!important}
   .reg-ucet label,.co-registration>.form-group label{font-size:14px!important}
-  .reg-ucet label strong,.co-registration>.form-group label strong{font-size:16px!important}
+  .reg-ucet label strong,.co-registration>.form-group label strong{font-size:17px!important;margin-bottom:8px!important}
   .p .p-tools:has(.qty-wrap){flex-direction:column!important;align-items:stretch!important;gap:8px!important}
   .p .p-tools:has(.qty-wrap) form.pr-action{flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:8px!important}
   .p .p-tools:has(.qty-wrap) .qty-wrap{width:100%!important;height:44px!important}

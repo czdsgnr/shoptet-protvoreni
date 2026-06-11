@@ -20,6 +20,29 @@
 /* Odstranit zbylý rámeček celého formuláře z motivu (.sign .content form) */
 .sign .content form#register-form,.sign .content form.formRegistration,#register-form{border:0!important;box-shadow:none!important}
 
+/* --- Kompletní moderní redesign registračního formuláře (scoped #register-form) --- */
+#register-form{max-width:680px!important;margin-left:auto!important;margin-right:auto!important}
+/* Sekce (Osobní údaje / Fakturační adresa) */
+#register-form .box-sm{border:0!important;padding:0!important;margin:0!important;background:0!important;box-shadow:none!important}
+#register-form .box-sm>h4,#register-form h4.header-billing{margin:32px 0 18px!important;padding:0 0 12px!important;border:0!important;border-bottom:1px solid #eceff4!important;font-size:18px!important;font-weight:700!important;color:#16223b!important;background:0!important;text-transform:none!important}
+/* Form-group rozestupy */
+#register-form .box-sm .form-group{margin:0 0 18px!important}
+/* Labely polí */
+#register-form .box-sm .form-group>label{display:block!important;margin:0 0 7px!important;padding:0!important;font-size:14px!important;font-weight:600!important;line-height:1.3!important;color:#2c3a4f!important;text-transform:none!important;background:0!important;text-align:left!important}
+/* Inputy */
+#register-form .form-control{width:100%!important;height:48px!important;box-sizing:border-box!important;padding:0 16px!important;border:1.5px solid #e3e8f0!important;border-radius:10px!important;background:#fff!important;font-size:15px!important;color:#16223b!important;box-shadow:none!important;transition:border-color .15s,box-shadow .15s!important}
+#register-form .form-control:hover{border-color:#cdd8e6!important}
+#register-form .form-control:focus{border-color:#1f6fb2!important;box-shadow:0 0 0 3px rgba(31,111,178,.15)!important;outline:0!important}
+#register-form select.form-control{appearance:auto!important;-webkit-appearance:auto!important;cursor:pointer!important}
+#register-form textarea.form-control{height:auto!important;min-height:96px!important;padding:12px 16px!important}
+/* Vlastní moderní checkboxy (newsletter, souhlas, companyShopping) */
+#register-form input[type=checkbox]{appearance:none!important;-webkit-appearance:none!important;flex:0 0 auto!important;width:22px!important;height:22px!important;min-width:22px!important;margin:1px 12px 0 0!important;padding:0!important;border:2px solid #c4cedd!important;border-radius:6px!important;background:#fff!important;cursor:pointer!important;position:relative!important;vertical-align:top!important;transition:border-color .15s,background .15s!important}
+#register-form input[type=checkbox]:checked{border-color:#1f6fb2!important;background:#1f6fb2!important}
+#register-form input[type=checkbox]:checked::after{content:""!important;position:absolute!important;left:6px!important;top:2px!important;width:6px!important;height:11px!important;border:solid #fff!important;border-width:0 2.5px 2.5px 0!important;transform:rotate(45deg)!important}
+/* Tlačítko REGISTROVAT */
+#register-form [type=submit]{width:100%!important;height:54px!important;margin-top:12px!important;padding:0 20px!important;border:0!important;border-radius:12px!important;background:#1f6fb2!important;color:#fff!important;font-size:16px!important;font-weight:700!important;cursor:pointer!important;box-shadow:0 8px 20px rgba(31,111,178,.25)!important;transition:background .15s,box-shadow .15s,transform .15s!important}
+#register-form [type=submit]:hover{background:#18567f!important;box-shadow:0 10px 26px rgba(31,111,178,.32)!important;transform:translateY(-1px)!important}
+
 /* === 2) Login popup s benefity ========================================= */
 #login.has-benefits{width:min(760px,95vw)!important;max-width:none!important;right:0!important;left:auto!important}
 #login.has-benefits .popup-widget-inner{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:auto 1fr!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;box-shadow:0 24px 60px rgba(16,34,59,.18)!important}
@@ -68,6 +91,11 @@
   .reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{top:22px!important;left:20px!important;width:20px!important;height:20px!important;min-width:20px!important}
   .reg-ucet label,.co-registration>.form-group label{font-size:13.5px!important}
   .reg-ucet label strong,.co-registration>.form-group label strong{font-size:17px!important;margin-bottom:6px!important}
+  #register-form{max-width:100%!important}
+  #register-form .box-sm>h4,#register-form h4.header-billing{margin:24px 0 14px!important;font-size:17px!important}
+  #register-form .box-sm .form-group{margin:0 0 16px!important}
+  #register-form .form-control{height:46px!important}
+  #register-form [type=submit]{height:52px!important}
   .p .p-tools:has(.qty-wrap){flex-direction:column!important;align-items:stretch!important;gap:8px!important}
   .p .p-tools:has(.qty-wrap) form.pr-action{flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:8px!important}
   .p .p-tools:has(.qty-wrap) .qty-wrap{width:100%!important;height:44px!important}

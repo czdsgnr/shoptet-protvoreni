@@ -19,7 +19,7 @@
 #login.has-benefits .popup-widget-inner{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:auto 1fr!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;box-shadow:0 24px 60px rgba(16,34,59,.18)!important}
 #login.has-benefits>.popup-widget-inner>h2{grid-column:1!important;grid-row:1!important;margin:0!important;padding:40px 38px 18px!important;font-size:22px!important;font-weight:700!important;color:#16223b!important;background:0!important}
 #login.has-benefits>.popup-widget-inner>#customerLogin{grid-column:1!important;grid-row:2!important;padding:0 38px 40px!important}
-#login.has-benefits .login-benefits{grid-column:2!important;grid-row:1/-1!important;display:flex!important;flex-direction:column!important;padding:52px 52px 44px 42px!important;background:linear-gradient(180deg,#f4f8fe,#eaf1fb)!important;border-left:1px solid #e3ebf7!important}
+#login.has-benefits .login-benefits{grid-column:2!important;grid-row:1/-1!important;display:flex!important;flex-direction:column!important;padding:56px 56px 48px 48px!important;background:linear-gradient(180deg,#f4f8fe,#eaf1fb)!important;border-left:1px solid #e3ebf7!important}
 #login .lb-title{margin:0 0 6px!important;padding:0!important;font-size:22px!important;font-weight:700!important;color:#16223b!important;background:0!important;border:0!important}
 #login .lb-sub{margin:0 0 22px!important;padding:0!important;font-size:14px!important;line-height:1.5!important;color:#5a6b7e!important}
 #login .lb-list{list-style:none!important;margin:0 0 28px!important;padding:0!important}

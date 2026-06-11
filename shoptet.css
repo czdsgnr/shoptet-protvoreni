@@ -31,9 +31,10 @@
 /* === 3) Quantity widget u "Do košíku" ================================== */
 /* Scopnuto na .p-tools, ktere realne dostaly widget (:has(.qty-wrap)),
    aby se nezasahovalo do caruselu a jinych karet. Vse ukotveno do karty. */
-.p .p-tools:has(.qty-wrap){position:static!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important}
-.p .p-tools:has(.qty-wrap) form.pr-action{display:flex!important;align-items:center!important;gap:8px!important;flex:1 1 auto!important;min-width:0!important;width:auto!important;margin:0!important}
-.p .p-tools:has(.qty-wrap) .add-to-cart-button{flex:1 1 auto!important;min-width:0!important;width:auto!important}
+.p .p-tools:has(.qty-wrap){position:static!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;flex-wrap:wrap!important}
+.p .p-tools:has(.qty-wrap) form.pr-action{display:flex!important;align-items:center!important;gap:8px!important;flex:1 1 auto!important;min-width:0!important;width:auto!important;margin:0!important;padding:0!important}
+.p .p-tools:has(.qty-wrap) form.pr-action .quantity{margin:0!important}
+.p .p-tools:has(.qty-wrap) .add-to-cart-button,.p .p-tools:has(.qty-wrap) .btn.btn-cart{flex:1 1 auto!important;min-width:0!important;width:auto!important;height:auto!important;min-height:42px!important}
 .p .qty-wrap{display:inline-flex;align-items:stretch;flex:0 0 auto;border:1px solid #ddd;border-radius:6px;overflow:hidden;height:38px;box-sizing:border-box}
 .p .qty-btn{width:30px;border:0;background:#f5f5f5;cursor:pointer;font-size:16px;line-height:1;padding:0;user-select:none}
 .p .qty-btn:hover{background:#e8e8e8}
@@ -64,7 +65,7 @@
   .p .p-tools:has(.qty-wrap) .qty-wrap{width:100%!important;height:44px!important}
   .p .p-tools:has(.qty-wrap) .qty-input{flex:1 1 auto!important;width:auto!important}
   .p .p-tools:has(.qty-wrap) .qty-btn{flex:0 0 46px!important;width:46px!important}
-  .p .p-tools:has(.qty-wrap) .add-to-cart-button{width:100%!important}
+  .p .p-tools:has(.qty-wrap) .add-to-cart-button,.p .p-tools:has(.qty-wrap) .btn.btn-cart{width:100%!important;height:auto!important;min-height:46px!important}
 }
 @media(max-width:600px){
   #login.has-benefits{width:min(440px,96vw)!important}

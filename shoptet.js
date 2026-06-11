@@ -17,13 +17,14 @@
     benefits.className = 'login-benefits';
     benefits.innerHTML =
       '<h3 class="lb-title">Ještě účet nemáte?</h3>' +
+      '<p class="lb-sub">Zaregistrujte se zdarma a získejte:</p>' +
       '<ul class="lb-list">' +
         '<li>Věrnostní bodový systém</li>' +
         '<li>Historie objednávek na jednom místě</li>' +
         '<li>Rychlejší nákup bez vyplňování údajů</li>' +
         '<li>Speciální slevy pro registrované</li>' +
       '</ul>' +
-      '<a href="/registrace/" class="lb-cta">Vytvořit nový účet</a>';
+      '<a href="/registrace/" class="lb-cta">Vytvořit účet zdarma</a>';
 
     inner.appendChild(benefits);
     popup.classList.add('has-benefits');

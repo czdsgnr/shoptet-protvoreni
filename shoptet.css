@@ -14,12 +14,11 @@
 .reg-ucet>.form-group:has(input:checked),.co-registration>.form-group:has(input:checked){border-color:#1f6fb2!important;background:#f2f8ff!important;box-shadow:0 0 0 1px #1f6fb2 inset,0 8px 24px rgba(31,111,178,.12)!important}
 .reg-ucet label,.co-registration>.form-group label{display:block!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;background:0!important;box-shadow:none!important;font-size:13.5px!important;line-height:1.6!important;color:#5a6b7e!important;text-align:left!important;text-transform:none!important;cursor:pointer!important}
 .reg-ucet label strong,.co-registration>.form-group label strong{display:block!important;margin:0 0 8px!important;font-size:18px!important;line-height:1.3!important;font-weight:700!important;color:#16223b!important}
-/* .co-registration: skryté nativní radio (celá karta klikací) + vlastní moderní kolečko */
-.co-registration>.form-group input[type=radio]{position:absolute!important;top:0!important;left:0!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;opacity:0!important;cursor:pointer!important;z-index:2!important;appearance:none!important;-webkit-appearance:none!important}
-.co-registration>.form-group label::before{content:""!important;display:block!important;position:absolute!important;left:26px!important;top:28px!important;width:22px!important;height:22px!important;border:2px solid #c4cedd!important;border-radius:50%!important;background:#fff!important;box-sizing:border-box!important;z-index:3!important;transition:border-color .15s,box-shadow .15s,background .15s!important}
-.co-registration>.form-group:has(input:checked) label::before{border-color:#1f6fb2!important;background:#1f6fb2!important;box-shadow:inset 0 0 0 4px #fff!important}
-/* .reg-ucet (fallback): nativní radio viditelné */
-.reg-ucet input[type=radio]{display:inline-block!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:28px!important;left:28px!important;width:22px!important;height:22px!important;min-width:22px!important;margin:0!important;appearance:auto!important;-webkit-appearance:radio!important;accent-color:#1f6fb2!important;cursor:pointer!important}
+/* Nativní radio stylované jako moderní kolečko (pseudo-elementy motiv blokuje) */
+.reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{appearance:none!important;-webkit-appearance:none!important;display:inline-block!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:27px!important;left:26px!important;width:22px!important;height:22px!important;min-width:22px!important;margin:0!important;padding:0!important;border:2px solid #c4cedd!important;border-radius:50%!important;background:#fff!important;box-shadow:none!important;box-sizing:border-box!important;cursor:pointer!important;transition:border-color .15s,box-shadow .15s,background .15s!important}
+.reg-ucet input[type=radio]:checked,.co-registration>.form-group input[type=radio]:checked{border-color:#1f6fb2!important;background:#1f6fb2!important;box-shadow:inset 0 0 0 4px #fff!important}
+/* Odstranit zbylý rámeček celého formuláře z motivu (.sign .content form) */
+#register-form{border:0!important;box-shadow:none!important}
 
 /* === 2) Login popup s benefity ========================================= */
 #login.has-benefits{width:min(760px,95vw)!important;max-width:none!important;right:0!important;left:auto!important}
@@ -66,8 +65,7 @@
 @media(max-width:767px){
   .reg-ucet,.co-registration{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:32px!important}
   .reg-ucet>.form-group,.co-registration>.form-group{min-height:auto!important;padding:20px 20px 20px 58px!important}
-  .co-registration>.form-group label::before{left:20px!important;top:22px!important}
-  .reg-ucet input[type=radio]{top:22px!important;left:22px!important;width:20px!important;height:20px!important;min-width:20px!important}
+  .reg-ucet input[type=radio],.co-registration>.form-group input[type=radio]{top:22px!important;left:20px!important;width:20px!important;height:20px!important;min-width:20px!important}
   .reg-ucet label,.co-registration>.form-group label{font-size:13.5px!important}
   .reg-ucet label strong,.co-registration>.form-group label strong{font-size:17px!important;margin-bottom:6px!important}
   .p .p-tools:has(.qty-wrap){flex-direction:column!important;align-items:stretch!important;gap:8px!important}

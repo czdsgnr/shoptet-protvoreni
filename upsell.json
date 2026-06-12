@@ -1,6 +1,30 @@
 {
   "title": "Mohlo by se vám ještě hodit",
   "products": [
-    { "code": "148589", "url": "/odmena-pro-balice/" }
+    {
+      "code": "148589",
+      "url": "/odmena-pro-balice/"
+    },
+    {
+      "code": "A009-11I",
+      "url": "/samolepici-predloha-ryby-7-barevnych-folii--1-bal-/",
+      "name": "Samolepící předloha - Ryby + 7 barevných fólií, 1 bal.",
+      "price": "49,01 Kč / balení",
+      "img": "https://cdn.myshoptet.com/usr/www.protvoreni.cz/user/shop/big/57160_samolepici-predloha-ryby-7-barevnych-folii--1-bal-.jpg?683c95ea"
+    },
+    {
+      "code": "489728",
+      "url": "/penova-mozaika-3d---letadlo-se-stojankem/",
+      "name": "Pěnová mozaika 3D – LETADLO se stojánkem",
+      "price": "59 Kč / ks",
+      "img": "https://cdn.myshoptet.com/usr/www.protvoreni.cz/user/shop/big/94873_118bc89ce6399a0e19b6f261ddbb381485ee86dd.jpg?683c95ea"
+    },
+    {
+      "code": "338587",
+      "url": "/samolepky--penove--zoo--mix--46ks--bal/",
+      "name": "Samolepky, pěnové, zoo, mix, 46ks/ bal.",
+      "price": "53 Kč / balení",
+      "img": "https://cdn.myshoptet.com/usr/www.protvoreni.cz/user/shop/big/46270_samolepky--penove--zoo--mix--46ks--bal.jpg?683c95ea"
+    }
   ]
 }

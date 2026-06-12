@@ -161,12 +161,38 @@
       });
   }
   resultsEl.addEventListener('click', function (e) {
-    if (e.target.dataset.add == null) return;
-    var p = window.__uaTmp[+e.target.dataset.add];
+    var btn = e.target;
+    if (btn.dataset.add == null) return;
+    var p = window.__uaTmp[+btn.dataset.add];
     if (!p || !p.code) { setMsg('⚠ Produkt nemá kód – nelze přidat.'); return; }
     if (state.products.some(function (x) { return x.code === p.code; })) { setMsg('Tento produkt už je vybraný.'); return; }
-    state.products.push({ code: p.code, url: p.url, name: p.name, price: p.price, img: p.img });
-    renderSelected(); setMsg('Přidáno: ' + p.name);
+    // Ověř varianty: produkt s více priceId nelze přidat přímo do košíku
+    btn.disabled = true; var orig = btn.textContent; btn.textContent = 'Ověřuji…';
+    setMsg('Ověřuji varianty u „' + p.name + '"…');
+    fetch(p.url, { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (html) {
+        var pids = {};
+        if (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          doc.querySelectorAll('input[name="priceId"]').forEach(function (el) { if (el.value) pids[el.value] = 1; });
+        }
+        var n = Object.keys(pids).length;
+        if (n > 1) {
+          setMsg('⚠ „' + p.name + '" má varianty (' + n + ') – jako doplněk ho nelze nabídnout.');
+          btn.disabled = false; btn.textContent = '🔀 varianty'; btn.classList.add('sec');
+          return;
+        }
+        state.products.push({ code: p.code, url: p.url, name: p.name, price: p.price, img: p.img });
+        renderSelected(); setMsg('✓ Přidáno: ' + p.name);
+        btn.textContent = '✓ Přidáno'; btn.classList.add('sec');
+      })
+      .catch(function () {
+        // nepodařilo se ověřit – přidej, ale upozorni
+        state.products.push({ code: p.code, url: p.url, name: p.name, price: p.price, img: p.img });
+        renderSelected(); setMsg('Přidáno (varianty nešlo ověřit): ' + p.name);
+        btn.textContent = '✓ Přidáno'; btn.classList.add('sec');
+      });
   });
 
   /* ---- načti aktuální config ---- */

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Náhled registrace = eshop (skutečná struktura + CSS)</title>
+<style>
+/* Základ stránky (simuluje Shoptet) */
+*{box-sizing:border-box}
+body{margin:0;color:#20202a;font-family:"Nunito Sans","Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.content-inner{max-width:921px;margin:0 auto;padding:40px 20px 80px}
+.content-inner>h1{font-size:34px;font-weight:800;text-align:center;margin:0 0 24px}
+.note{max-width:620px;margin:0 auto 18px;font-size:12px;color:#8a97a8;text-align:center}
+
+/* ====== PŘESNÁ KOPIE registračního CSS z shoptet.css ====== */
+body{background:#fff!important}
+#register-form{max-width:620px!important;margin:0 auto!important;padding:34px!important;background:#fff!important;border:1px solid #e4e9f0!important;border-radius:20px!important;box-shadow:0 18px 50px rgba(16,34,59,.08)!important}
+.reg-ucet>h4,.co-registration.box-bg-transparent>h4{display:block!important;grid-column:1/-1!important;margin:0 0 14px!important;padding:0!important;border:0!important;font-size:13px!important;font-weight:800!important;letter-spacing:.05em!important;text-transform:uppercase!important;color:#8a97a8!important;background:0!important}
+#register-form .box-sm>h4{display:block!important;margin:30px 0 16px!important;padding:0 0 12px!important;border:0!important;border-bottom:1px solid #eef1f6!important;font-size:13px!important;font-weight:800!important;letter-spacing:.05em!important;text-transform:uppercase!important;color:#8a97a8!important;background:0!important}
+.reg-ucet,.co-registration.box-bg-transparent{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;margin:0 0 6px!important;padding:0!important;border:0!important;min-width:0!important;background:0!important;box-shadow:none!important}
+.reg-ucet>.form-group,.co-registration.box-bg-transparent>.form-group{position:relative!important;display:block!important;box-sizing:border-box!important;height:auto!important;min-height:0!important;margin:0!important;padding:18px 48px 18px 58px!important;border:1.5px solid #e4e9f0!important;border-radius:16px!important;background:#fff!important;box-shadow:none!important;overflow:visible!important;cursor:pointer!important;transition:border-color .15s,box-shadow .15s,background .15s,transform .15s!important}
+.reg-ucet>.form-group:hover,.co-registration.box-bg-transparent>.form-group:hover{border-color:#bcd3ec!important;box-shadow:0 8px 22px rgba(31,111,178,.10)!important;transform:translateY(-1px)!important}
+.reg-ucet>.form-group:has(input:checked),.co-registration.box-bg-transparent>.form-group:has(input:checked){border-color:#1f6fb2!important;background:#eef5fc!important;box-shadow:0 0 0 1px #1f6fb2 inset,0 10px 26px rgba(31,111,178,.12)!important}
+.reg-ucet>.form-group::before,.co-registration.box-bg-transparent>.form-group::before{content:"\1F464"!important;display:flex!important;position:absolute!important;left:15px!important;top:16px!important;width:30px!important;height:30px!important;align-items:center!important;justify-content:center!important;font-size:16px!important;border-radius:9px!important;background:#eef5fc!important}
+.reg-ucet>.form-group:last-of-type::before,.co-registration.box-bg-transparent>.form-group:last-of-type::before{content:"\1F3EA"!important}
+.reg-ucet input[type=radio],.co-registration.box-bg-transparent input[type=radio]{appearance:none!important;-webkit-appearance:none!important;display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:16px!important;right:16px!important;left:auto!important;width:22px!important;height:22px!important;min-width:22px!important;margin:0!important;padding:0!important;border:2px solid #c4cedd!important;border-radius:50%!important;background:#fff!important;box-shadow:none!important;box-sizing:border-box!important;cursor:pointer!important;transition:.15s!important}
+.reg-ucet input[type=radio]:checked,.co-registration.box-bg-transparent input[type=radio]:checked{border-color:#1f6fb2!important;background:#1f6fb2!important;box-shadow:inset 0 0 0 4px #fff!important}
+.reg-ucet label,.co-registration.box-bg-transparent label{display:block!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;background:0!important;box-shadow:none!important;font-size:12.5px!important;line-height:1.5!important;color:#6b7a8f!important;text-align:left!important;text-transform:none!important;cursor:pointer!important}
+.reg-ucet label strong,.co-registration.box-bg-transparent label strong{display:block!important;margin:0 0 5px!important;font-size:16px!important;line-height:1.25!important;font-weight:800!important;color:#16223b!important}
+#register-form .box-sm{border:0!important;padding:0!important;margin:0!important;background:0!important;box-shadow:none!important}
+#register-form .box-sm .form-group{margin:0 0 16px!important}
+#register-form .box-sm .form-group>label{display:block!important;margin:0 0 6px!important;padding:0!important;font-size:13.5px!important;font-weight:700!important;line-height:1.3!important;color:#33415a!important;text-transform:none!important;background:0!important;text-align:left!important}
+#register-form .required-asterisk::after{color:#e0556a!important}
+#register-form .form-control{width:100%!important;height:50px!important;box-sizing:border-box!important;padding:0 15px!important;border:1.5px solid #e4e9f0!important;border-radius:11px!important;background:#fbfcfe!important;font-size:15px!important;color:#16223b!important;box-shadow:none!important;transition:border-color .15s,box-shadow .15s,background .15s!important}
+#register-form .form-control:hover{border-color:#cdd8e6!important}
+#register-form .form-control:focus{border-color:#1f6fb2!important;background:#fff!important;box-shadow:0 0 0 4px rgba(31,111,178,.13)!important;outline:0!important}
+#register-form select.form-control{appearance:auto!important;-webkit-appearance:auto!important;cursor:pointer!important}
+#register-form input[type=checkbox]{appearance:none!important;-webkit-appearance:none!important;flex:0 0 auto!important;width:22px!important;height:22px!important;min-width:22px!important;margin:1px 12px 0 0!important;padding:0!important;border:2px solid #c4cedd!important;border-radius:7px!important;background:#fff!important;cursor:pointer!important;position:relative!important;vertical-align:top!important;transition:.15s!important}
+#register-form input[type=checkbox]:checked{border-color:#1f6fb2!important;background:#1f6fb2!important}
+#register-form input[type=checkbox]:checked::after{content:""!important;position:absolute!important;left:6px!important;top:2px!important;width:6px!important;height:11px!important;border:solid #fff!important;border-width:0 2.5px 2.5px 0!important;transform:rotate(45deg)!important}
+#register-form .stay-in-touch .form-group,#register-form .consents{display:flex!important;align-items:flex-start!important;margin:0 0 14px!important}
+#register-form .stay-in-touch label,#register-form .consents label{font-size:13.5px!important;line-height:1.5!important;color:#33415a!important;text-align:left!important}
+#register-form .consents a{color:#1f6fb2!important;font-weight:600!important}
+#register-form [type=submit]{width:100%!important;height:54px!important;margin-top:14px!important;padding:0 20px!important;border:0!important;border-radius:13px!important;background:#1f6fb2!important;color:#fff!important;font-size:16px!important;font-weight:800!important;cursor:pointer!important;box-shadow:0 10px 24px rgba(31,111,178,.28)!important;transition:.15s!important}
+#register-form [type=submit]:hover{background:#175a93!important;box-shadow:0 12px 30px rgba(31,111,178,.36)!important;transform:translateY(-1px)!important}
+#register-form .submit-wrapper p{margin:0!important}
+@media(max-width:600px){
+  .reg-ucet,.co-registration.box-bg-transparent{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:6px!important}
+  #register-form{max-width:100%!important;padding:20px 16px!important;border-radius:16px!important}
+  #register-form .box-sm>h4{margin:24px 0 14px!important}
+  #register-form .form-control{height:48px!important}
+}
+</style>
+</head>
+<body>
+<div class="content-inner">
+  <h1>Registrace</h1>
+  <p class="note">↑ Lokální náhled se SKUTEČNOU strukturou Shoptetu + reálné CSS = přesně to, co bude na eshopu. Zmenši okno = mobil.</p>
+
+  <form id="register-form" action="#" method="post" class="csrf-enabled formRegistration">
+
+    <!-- Typ zákazníka (struktura návštěvníka: fieldset.co-registration.box-bg-transparent) -->
+    <fieldset class="box box-bg-transparent co-box co-registration">
+      <h4>Typ zákazníka</h4>
+      <div class="form-group">
+        <input type="radio" name="customerGroupId" value="1" id="zakaznik" class="radio" checked>
+        <label for="zakaznik" class="whole-width"><strong>Zákazník</strong> (Výhody registrace: úspora času, údaje vyplníte pouze jednou a při každé další objednávce jsou vyplněny automaticky. Přehled objednávek a faktur.)</label>
+      </div>
+      <div class="form-group">
+        <input type="radio" name="customerGroupId" value="2" id="b2b" class="radio show-full-profile is-wholesale">
+        <label for="b2b" class="whole-width"><strong>B2B Velkoobchodní – Pro obchody</strong> (po registraci vyčkejte na potvrzení o přidělení velkoobchodního ceníku – bude zaslán na Váš e-mail)</label>
+      </div>
+    </fieldset>
+
+    <!-- Osobní údaje -->
+    <div class="co-box co-registration">
+      <fieldset class="box box-sm box-bg-default">
+        <h4>Osobní údaje</h4>
+        <div class="form-group smart-label-wrapper"><label for="email"><span class="required-asterisk">E-mail</span></label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="vas@email.cz"></div>
+        <div class="form-group smart-label-wrapper"><label for="password"><span class="required-asterisk">Heslo</span></label>
+          <input type="password" id="password" name="password" class="form-control"></div>
+        <div class="form-group smart-label-wrapper"><label for="passwordAgain"><span class="required-asterisk">Heslo (kontrola)</span></label>
+          <input type="password" id="passwordAgain" name="passwordAgain" class="form-control"></div>
+      </fieldset>
+    </div>
+
+    <!-- Fakturační adresa -->
+    <div class="co-box co-registration">
+      <fieldset class="box box-sm box-bg-default">
+        <h4 class="header-billing">Fakturační adresa</h4>
+        <div class="form-group smart-label-wrapper"><label for="billFullName"><span class="required-asterisk">Jméno a příjmení</span></label>
+          <input type="text" id="billFullName" name="billFullName" class="form-control" placeholder="Jan Novák"></div>
+        <div class="form-group smart-label-wrapper"><label for="phone"><span class="required-asterisk">Telefon</span></label>
+          <input type="tel" id="phone" name="phone" class="form-control" placeholder="+420 777 123 456"></div>
+        <div class="form-group smart-label-wrapper"><label for="billStreet"><span class="required-asterisk">Ulice</span></label>
+          <input type="text" id="billStreet" name="billStreet" class="form-control" placeholder="Palackého náměstí"></div>
+        <div class="form-group smart-label-wrapper"><label for="billHouseNumber"><span class="required-asterisk">Číslo domu</span></label>
+          <input type="text" id="billHouseNumber" name="billHouseNumber" class="form-control short" placeholder="98/19"></div>
+        <div class="form-group smart-label-wrapper"><label for="billCity"><span class="required-asterisk">Město</span></label>
+          <input type="text" id="billCity" name="billCity" class="form-control" placeholder="Hořovice"></div>
+        <div class="form-group smart-label-wrapper"><label for="billZip"><span class="required-asterisk">PSČ</span></label>
+          <input type="text" id="billZip" name="billZip" class="form-control short" placeholder="268 01"></div>
+        <div class="form-group smart-label-wrapper"><label for="billCountryId"><span class="required-asterisk">Země</span></label>
+          <select id="billCountryId" name="billCountryId" class="form-control"><option>Česká republika</option><option>Slovensko</option></select></div>
+      </fieldset>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="co-box co-registration">
+      <fieldset class="stay-in-touch">
+        <div class="form-group">
+          <input type="checkbox" name="doNotSendNewsletter" id="sendNewsletter" value="0">
+          <label for="sendNewsletter" class="whole-width">Nepřeji si odebírat newslettery</label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Potvrzení -->
+    <fieldset>
+      <div class="form-group consents">
+        <input type="checkbox" name="consents[]" id="consents28" value="28" required>
+        <label for="consents28" class="whole-width"><span class="required-asterisk">Registrací souhlasíte s <a href="#">obchodními podmínkami</a> a <a href="#">podmínkami ochrany osobních údajů</a></span></label>
+      </div>
+      <div class="form-group submit-wrapper">
+        <p><input type="submit" value="Registrovat" class="btn btn-secondary btn-text btn-login"></p>
+      </div>
+    </fieldset>
+
+  </form>
+</div>
+</body>
+</html>

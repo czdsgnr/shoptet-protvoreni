@@ -193,6 +193,25 @@
     else { localStorage.removeItem(TOKEN_KEY); setMsg('Token smazán.'); }
   });
 
+  function ghHdr(token) { return { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }; }
+
+  function saveViaApi(token, attempt) {
+    var api = 'https://api.github.com/repos/' + REPO + '/contents/' + FILE;
+    // čerstvá sha (bez cache)
+    return fetch(api + '?ref=main&_=' + Date.now(), { headers: ghHdr(token), cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (meta) {
+        var body = { message: 'Upsell: aktualizace doplňků z admin panelu', content: btoa(unescape(encodeURIComponent(jsonOut()))), branch: 'main' };
+        if (meta && meta.sha) body.sha = meta.sha;
+        return fetch(api, { method: 'PUT', headers: ghHdr(token), body: JSON.stringify(body) });
+      })
+      .then(function (r) {
+        if (r.ok) { setMsg('✅ Uloženo! Na webu se projeví do ~1-2 min.'); return; }
+        if (r.status === 409 && !attempt) { setMsg('Konflikt verze, zkouším znovu…'); return saveViaApi(token, 1); }
+        return r.text().then(function (t) { setMsg('❌ Chyba ukládání (' + r.status + '): ' + t.slice(0, 130)); });
+      });
+  }
+
   $('ua-save').addEventListener('click', function () {
     var token = localStorage.getItem(TOKEN_KEY);
     if (!token) {
@@ -203,20 +222,7 @@
       return;
     }
     setMsg('Ukládám na GitHub…');
-    var api = 'https://api.github.com/repos/' + REPO + '/contents/' + FILE;
-    var hdr = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
-    fetch(api + '?ref=main', { headers: hdr })
-      .then(function (r) { return r.ok ? r.json() : {}; })
-      .then(function (meta) {
-        var body = { message: 'Upsell: aktualizace doplňků z admin panelu', content: btoa(unescape(encodeURIComponent(jsonOut()))), branch: 'main' };
-        if (meta && meta.sha) body.sha = meta.sha;
-        return fetch(api, { method: 'PUT', headers: hdr, body: JSON.stringify(body) });
-      })
-      .then(function (r) {
-        if (r.ok) setMsg('✅ Uloženo! Na webu se projeví do ~1-2 min (GitHub build).');
-        else r.text().then(function (t) { setMsg('❌ Chyba ukládání: ' + t.slice(0, 120)); });
-      })
-      .catch(function (e) { setMsg('❌ Chyba sítě: ' + e.message); });
+    saveViaApi(token, 0).catch(function (e) { setMsg('❌ Chyba sítě: ' + (e && e.message)); });
   });
 
   /* ---- zavření ---- */

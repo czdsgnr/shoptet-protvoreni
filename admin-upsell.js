@@ -129,12 +129,22 @@
   }
 
   function doSearch(q) {
-    fetch('/?fulltext=' + encodeURIComponent(q), { credentials: 'same-origin' })
-      .then(function (r) { return r.text(); })
+    setMsg('Hledám „' + q + '"…');
+    fetch('/?fulltext=' + encodeURIComponent(q), { credentials: 'same-origin', headers: { 'Accept': 'text/html' } })
+      .then(function (r) {
+        setMsg('Hledání: HTTP ' + r.status);
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
       .then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
-        var cards = Array.prototype.slice.call(doc.querySelectorAll('.p[data-micro="product"]')).slice(0, 24);
-        if (!cards.length) { resultsEl.innerHTML = '<div class="ua-empty">Nic nenalezeno pro „' + esc(q) + '".</div>'; return; }
+        var cards = Array.prototype.slice.call(
+          doc.querySelectorAll('.p[data-micro="product"], [data-testid="productItem"], .products .p')
+        );
+        // dedup podle product-id
+        var seen = {}; cards = cards.filter(function (c) { var id = c.getAttribute('data-micro-product-id') || Math.random(); if (seen[id]) return false; seen[id] = 1; return true; }).slice(0, 24);
+        setMsg('Nalezeno ' + cards.length + ' produktů (HTML ' + html.length + ' B)');
+        if (!cards.length) { resultsEl.innerHTML = '<div class="ua-empty">Nic nenalezeno pro „' + esc(q) + '". (stáhnuto ' + html.length + ' B)</div>'; return; }
         resultsEl.innerHTML = cards.map(function (c, i) {
           var p = parseCard(c);
           window.__uaTmp = window.__uaTmp || {}; window.__uaTmp[i] = p;
@@ -145,7 +155,10 @@
             '<button class="ua-btn" data-add="' + i + '">+ Přidat</button></div>';
         }).join('');
       })
-      .catch(function () { resultsEl.innerHTML = '<div class="ua-empty">Hledání selhalo.</div>'; });
+      .catch(function (e) {
+        resultsEl.innerHTML = '<div class="ua-empty">Hledání selhalo: ' + esc(e && e.message || 'neznámá chyba') + '</div>';
+        setMsg('❌ Chyba hledání: ' + (e && e.message || 'neznámá'));
+      });
   }
   resultsEl.addEventListener('click', function (e) {
     if (e.target.dataset.add == null) return;

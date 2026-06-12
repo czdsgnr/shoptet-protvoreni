@@ -78,91 +78,110 @@
     document.querySelectorAll('.p[data-micro="product"]').forEach(buildQty);
   }
 
-  /* === C) Upsell v košíku ============================================== */
+  /* === C) Upsell v košíku (řízeno přes upsell.json + admin panel) ======= */
+  var UPSELL_CFG = 'https://czdsgnr.github.io/shoptet-protvoreni/upsell.json';
+
   function initUpsell() {
     if (!/\/kosik/.test(location.pathname)) return;
 
-    // Doplňky: kód produktu (Ceník → Kód produktu) + URL produktu.
-    // Pro 100% neviditelné produkty doplň ručně name + price (+ img) → nefetchuje se.
-    var UPSELLY = [
-      { code: '148589', url: '/odmena-pro-balice/' }
-      // { code: 'X', url: '/y/', name: '...', price: '99 Kč', img: 'https://...' }
-    ];
-    var TITLE = 'Mohlo by se vám ještě hodit';
-    var CACHE = null;
+    fetch(UPSELL_CFG + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (cfg) {
+        var UPSELLY = (cfg && cfg.products) || [];
+        var TITLE = (cfg && cfg.title) || 'Mohlo by se vám ještě hodit';
+        if (!UPSELLY.length) return;
+        var CACHE = null;
 
-    function formatPrice(amount, currency) {
-      var n = parseFloat(amount);
-      if (isNaN(n)) return '';
-      var num = (n % 1 === 0) ? String(n) : n.toFixed(2).replace('.', ',');
-      var cur = currency === 'CZK' ? 'Kč' : (currency === 'EUR' ? '€' : currency || '');
-      return (num + ' ' + cur).trim();
-    }
-    function jeVKosiku(url) {
-      return url ? !!document.querySelector('.cart-table a[href*="' + url + '"]') : false;
-    }
-    function nactiData(p) {
-      if (p.name && p.price) {
-        return Promise.resolve({ code: p.code, url: p.url, img: p.img || '', name: p.name, price: p.price });
-      }
-      return fetch(p.url, { credentials: 'same-origin' })
-        .then(function (r) { return r.ok ? r.text() : null; })
-        .then(function (html) {
-          if (!html) return null;
-          var doc = new DOMParser().parseFromString(html, 'text/html');
-          function meta(name) {
-            var el = doc.querySelector('meta[property="' + name + '"], meta[name="' + name + '"]');
-            return el ? el.getAttribute('content') : '';
+        function formatPrice(amount, currency) {
+          var n = parseFloat(amount);
+          if (isNaN(n)) return '';
+          var num = (n % 1 === 0) ? String(n) : n.toFixed(2).replace('.', ',');
+          var cur = currency === 'CZK' ? 'Kč' : (currency === 'EUR' ? '€' : currency || '');
+          return (num + ' ' + cur).trim();
+        }
+        function jeVKosiku(url) {
+          return url ? !!document.querySelector('.cart-table a[href*="' + url + '"]') : false;
+        }
+        // Preferuj data uložená adminem (funguje i u skrytých produktů); jinak dotáhni z URL.
+        function nactiData(p) {
+          if (p.name && p.price) {
+            return Promise.resolve({ code: p.code, url: p.url, img: p.img || '', name: p.name, price: p.price });
           }
-          var price = formatPrice(meta('product:price:amount'), meta('product:price:currency'));
-          if (!price) return null; // 404 / redirect → není produktová stránka
-          return {
-            code: p.code, url: p.url,
-            img: meta('og:image'),
-            name: (meta('og:title') || '').split(' - ')[0].trim(),
-            price: price
-          };
-        })
-        .catch(function () { return null; });
-    }
-    function renderUpsell(data) {
-      var stary = document.getElementById('upsell-box');
-      if (stary) stary.remove();
-      var summary = document.querySelector('.cart-content .cart-summary');
-      if (!summary) return;
-      var polozky = data.filter(function (p) { return p && !jeVKosiku(p.url); });
-      if (!polozky.length) return;
-      var box = document.createElement('div');
-      box.id = 'upsell-box';
-      box.innerHTML =
-        '<h3 class="upsell-title">' + TITLE + '</h3>' +
-        polozky.map(function (p) {
-          return '<div class="upsell-item">' +
-            (p.img ? '<img class="upsell-img" src="' + p.img + '" alt="' + p.name + '">' : '') +
-            '<span class="upsell-name">' + p.name + '</span>' +
-            '<span class="upsell-price">' + p.price + '</span>' +
-            '<button type="button" class="upsell-add" data-code="' + p.code + '">Přidat do košíku</button>' +
-            '</div>';
-        }).join('');
-      summary.parentNode.insertBefore(box, summary);
-      box.querySelectorAll('.upsell-add').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          btn.disabled = true;
-          btn.textContent = 'Přidávám…';
-          shoptet.cartShared.addToCart({ productCode: btn.dataset.code, amount: 1 }, true);
-        });
-      });
-    }
-    function buildUpsell() {
-      if (CACHE) { renderUpsell(CACHE); return; }
-      Promise.all(UPSELLY.map(nactiData)).then(function (data) {
-        CACHE = data;
-        renderUpsell(data);
-      });
-    }
-    document.addEventListener('DOMContentLoaded', buildUpsell);
-    document.addEventListener('ShoptetCartUpdated', buildUpsell);
-    buildUpsell();
+          if (!p.url) return Promise.resolve(null);
+          return fetch(p.url, { credentials: 'same-origin' })
+            .then(function (r) { return r.ok ? r.text() : null; })
+            .then(function (html) {
+              if (!html) return null;
+              var doc = new DOMParser().parseFromString(html, 'text/html');
+              function meta(name) {
+                var el = doc.querySelector('meta[property="' + name + '"], meta[name="' + name + '"]');
+                return el ? el.getAttribute('content') : '';
+              }
+              var price = formatPrice(meta('product:price:amount'), meta('product:price:currency'));
+              if (!price) return null;
+              return {
+                code: p.code, url: p.url,
+                img: meta('og:image'),
+                name: (meta('og:title') || '').split(' - ')[0].trim(),
+                price: price
+              };
+            })
+            .catch(function () { return null; });
+        }
+        function renderUpsell(data) {
+          var stary = document.getElementById('upsell-box');
+          if (stary) stary.remove();
+          // umísti POD produkty (za tabulku košíku), fallback před souhrn
+          var anchor = document.querySelector('.cart-table');
+          var summary = document.querySelector('.cart-content .cart-summary');
+          if (!anchor && !summary) return;
+          var polozky = data.filter(function (p) { return p && !jeVKosiku(p.url); });
+          if (!polozky.length) return;
+          var box = document.createElement('div');
+          box.id = 'upsell-box';
+          box.innerHTML =
+            '<h3 class="upsell-title">' + TITLE + '</h3>' +
+            polozky.map(function (p) {
+              return '<div class="upsell-item">' +
+                (p.img ? '<img class="upsell-img" src="' + p.img + '" alt="' + p.name + '">' : '') +
+                '<span class="upsell-name">' + p.name + '</span>' +
+                '<span class="upsell-price">' + p.price + '</span>' +
+                '<button type="button" class="upsell-add" data-code="' + p.code + '">Přidat do košíku</button>' +
+                '</div>';
+            }).join('');
+          if (anchor) {
+            var host = anchor.closest('form') || anchor.parentNode;
+            host.parentNode.insertBefore(box, host.nextSibling);
+          } else {
+            summary.parentNode.insertBefore(box, summary);
+          }
+          box.querySelectorAll('.upsell-add').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              btn.disabled = true;
+              btn.textContent = 'Přidávám…';
+              shoptet.cartShared.addToCart({ productCode: btn.dataset.code, amount: 1 }, true);
+            });
+          });
+        }
+        function buildUpsell() {
+          if (CACHE) { renderUpsell(CACHE); return; }
+          Promise.all(UPSELLY.map(nactiData)).then(function (data) {
+            CACHE = data;
+            renderUpsell(data);
+          });
+        }
+        document.addEventListener('ShoptetCartUpdated', buildUpsell);
+        buildUpsell();
+      })
+      .catch(function () {});
+  }
+
+  /* Admin panel pro výběr upsellů – aktivace přes ?upsell-admin v URL */
+  function maybeLoadUpsellAdmin() {
+    if (!/[?&]upsell-admin/.test(location.search)) return;
+    var s = document.createElement('script');
+    s.src = 'https://czdsgnr.github.io/shoptet-protvoreni/admin-upsell.js?t=' + Date.now();
+    (document.body || document.documentElement).appendChild(s);
   }
 
   /* === Init ============================================================ */
@@ -186,4 +205,5 @@
   });
 
   initUpsell();
+  maybeLoadUpsellAdmin();
 })();

@@ -87,6 +87,7 @@
     fetch(UPSELL_CFG + '?t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (cfg) {
+        if (cfg && cfg.enabled === false) return; // upsell dočasně vypnutý
         var UPSELLY = (cfg && cfg.products) || [];
         var TITLE = (cfg && cfg.title) || 'Mohlo by se vám ještě hodit';
         if (!UPSELLY.length) return;

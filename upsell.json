@@ -1,4 +1,5 @@
 {
+  "enabled": false,
   "title": "Mohlo by se vám ještě hodit",
   "products": [
     { "code": "148589", "url": "/odmena-pro-balice/" }

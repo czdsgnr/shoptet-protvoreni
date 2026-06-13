@@ -98,6 +98,10 @@ body.in-registrace{background:#fff!important}
 #upsell-box .upsell-add:hover{background:#43a047}
 #upsell-box .upsell-add:disabled{background:#999;cursor:default}
 
+/* Trvalé zobrazení pole pro slevový kupon v košíku */
+.discount-coupon:not(.uplatneno) form{display:block;margin-top:0}
+.kupon-odkaz{display:none}
+
 /* === 5) Mobil ========================================================== */
 @media(max-width:767px){
   .reg-ucet,.co-registration.box-bg-transparent{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:6px!important}

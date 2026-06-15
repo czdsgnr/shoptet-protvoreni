@@ -254,15 +254,22 @@
     ov.id = 'size-modal';
     ov.innerHTML =
       '<div class="sm-inner">' +
-        '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
-        '<h3>Tabulka velikostí</h3>' +
-        sizeChartHTML() +
+        '<div class="sm-head"><span class="sm-grip"></span>' +
+          '<h3>Tabulka velikostí</h3>' +
+          '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
+        '</div>' +
+        '<div class="sm-body">' + sizeChartHTML() + '</div>' +
       '</div>';
     document.body.appendChild(ov);
-    function close() { ov.remove(); document.removeEventListener('keydown', onEsc); }
+    document.documentElement.classList.add('sm-lock');
+    function close() {
+      ov.remove();
+      document.documentElement.classList.remove('sm-lock');
+      document.removeEventListener('keydown', onEsc);
+    }
     function onEsc(e) { if (e.key === 'Escape') close(); }
     ov.addEventListener('click', function (e) {
-      if (e.target === ov || e.target.classList.contains('sm-close')) close();
+      if (e.target === ov || e.target.closest('.sm-close')) close();
     });
     document.addEventListener('keydown', onEsc);
   }

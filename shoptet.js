@@ -182,23 +182,19 @@
   var SIZE_CHART_IMG = 'https://czdsgnr.github.io/shoptet-protvoreni/tabulka-velikosti.jpg';
 
   function initSizeChart() {
-    var detail = document.querySelector('.p-detail, [data-testid="productDetail"], #product-detail');
-    if (!detail) return;
     if (document.getElementById('size-chart-btn')) return;
-    // najdi popisek varianty obsahující "VELIKOST" (jen sizovaný textil)
-    var els = detail.querySelectorAll('label, legend, p, strong, span, .variant-name, .parameter-name');
-    var target = null;
-    for (var i = 0; i < els.length; i++) {
-      var t = (els[i].textContent || '').trim();
-      if (t.length < 70 && /VELIKOST/i.test(t)) { target = els[i]; break; }
-    }
-    if (!target) return;
+    // variantový blok (NE popisek) – tam je "zvolte VELIKOST textilu ZDE"
+    var params = document.querySelector('.detail-parameters');
+    if (!params) return;
+    var hasSize = /VELIKOST/i.test(params.textContent) ||
+      params.querySelector('[data-parameter-name*="VELIKOST"], [data-parameter-name*="velikost"]');
+    if (!hasSize) return;
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.id = 'size-chart-btn';
     btn.className = 'size-chart-btn';
     btn.innerHTML = '📏 Tabulka velikostí';
-    target.parentNode.insertBefore(btn, target.nextSibling);
+    params.parentNode.insertBefore(btn, params); // nad výběr velikosti
     btn.addEventListener('click', openSizeModal);
   }
 

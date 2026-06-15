@@ -98,6 +98,11 @@ body.in-registrace{background:#fff!important}
 #upsell-box .upsell-add:hover{background:#43a047}
 #upsell-box .upsell-add:disabled{background:#999;cursor:default}
 
+/* Nativní upsell "Doporučujeme přikoupit" – čitelný výběr varianty (barva/velikost) */
+.up-products-cart td.up-product-variants{padding:6px 0 6px 8px!important;text-align:left!important;justify-self:stretch!important}
+.up-products-cart select.up-variants{width:100%!important;min-width:200px!important;max-width:320px!important;height:auto!important;padding:9px 34px 9px 12px!important;border:1.5px solid #1f6fb2!important;border-radius:9px!important;background:#fff!important;color:#16223b!important;font-size:14px!important;font-weight:600!important;line-height:1.25!important;cursor:pointer!important;-webkit-appearance:menulist!important;appearance:auto!important;opacity:1!important;text-shadow:none!important}
+.up-products-cart select.up-variants option{color:#16223b}
+
 /* Trvalé zobrazení pole pro slevový kupon v košíku */
 .discount-coupon:not(.uplatneno) form{display:block;margin-top:0}
 .kupon-odkaz{display:none}

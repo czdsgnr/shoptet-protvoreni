@@ -179,8 +179,8 @@
 
   /* === D) Tabulka velikostí u textilu (modal) ========================== */
   var SIZE_CHART_HTML =
-    '<p class="sm-note">Velikost motivu na tričku: cca <strong>23 × 19 cm</strong> (výška × šířka).</p>' +
     '<h4 class="sm-h">Dětská trička</h4>' +
+    '<p class="sm-note">Velikost motivu: cca <strong>23 × 19 cm</strong> (výška × šířka).</p>' +
     '<div class="sm-tablewrap"><table class="sm-table">' +
       '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka</th></tr></thead>' +
       '<tbody>' +
@@ -192,7 +192,21 @@
       '</tbody>' +
     '</table></div>' +
     '<h4 class="sm-h">Dospělá trička</h4>' +
-    '<p class="sm-note">Rozměry brzy doplníme.</p>';
+    '<p class="sm-note">Velikost motivu: cca <strong>19 × 18 cm</strong> (výška × šířka).</p>' +
+    '<div class="sm-tablewrap"><table class="sm-table">' +
+      '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka</th></tr></thead>' +
+      '<tbody>' +
+        '<tr><td>XS</td><td>42 cm</td><td>46 cm</td><td>66 cm</td></tr>' +
+        '<tr><td>S</td><td>44 cm</td><td>48 cm</td><td>70 cm</td></tr>' +
+        '<tr><td>M</td><td>45 cm</td><td>50 cm</td><td>71 cm</td></tr>' +
+        '<tr><td>L</td><td>50 cm</td><td>51 cm</td><td>73 cm</td></tr>' +
+        '<tr><td>XL</td><td>52 cm</td><td>55 cm</td><td>74 cm</td></tr>' +
+        '<tr><td>XXL</td><td>54 cm</td><td>59 cm</td><td>77 cm</td></tr>' +
+        '<tr><td>3XL</td><td>55 cm</td><td>66 cm</td><td>80 cm</td></tr>' +
+        '<tr><td>4XL</td><td>56 cm</td><td>67 cm</td><td>80 cm</td></tr>' +
+      '</tbody>' +
+    '</table></div>' +
+    '<p class="sm-copyright">Upozornění: Motivy – obrázky na našich tričkách jsou chráněné autorským právem. Jsou výsledkem naší vlastní tvorby a bez našeho souhlasu je zakázáno je kopírovat, upravovat nebo dále šířit. Děkujeme, že respektujete naši práci.</p>';
 
   function initSizeChart() {
     if (document.getElementById('size-chart-btn')) return;

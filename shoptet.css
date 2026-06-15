@@ -122,6 +122,7 @@ body.in-registrace{background:#fff!important}
 #size-modal .sm-table th{background:#f1f4f9;font-weight:700;color:#33415a;white-space:nowrap}
 #size-modal .sm-table td:first-child{font-weight:700;color:#16223b}
 #size-modal .sm-table tbody tr:hover{background:#fafbfd}
+#size-modal .sm-copyright{margin:18px 0 0;padding-top:14px;border-top:1px solid #eef1f6;font-size:12px;line-height:1.5;color:#9aa7b8}
 
 /* === 5) Mobil ========================================================== */
 @media(max-width:767px){

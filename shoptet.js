@@ -178,7 +178,10 @@
   }
 
   /* === D) Tabulka velikostí u textilu (modal) ========================== */
-  var SIZE_CHART_HTML =
+  var SC_COPYRIGHT =
+    '<p class="sm-copyright">Upozornění: Motivy – obrázky na našich tričkách jsou chráněné autorským právem. Jsou výsledkem naší vlastní tvorby a bez našeho souhlasu je zakázáno je kopírovat, upravovat nebo dále šířit. Děkujeme, že respektujete naši práci.</p>';
+
+  var SC_TRICKA =
     '<h4 class="sm-h">Dětská trička</h4>' +
     '<p class="sm-note">Velikost motivu: cca <strong>23 × 19 cm</strong> (výška × šířka).</p>' +
     '<div class="sm-tablewrap"><table class="sm-table">' +
@@ -205,8 +208,28 @@
         '<tr><td>3XL</td><td>55 cm</td><td>66 cm</td><td>80 cm</td></tr>' +
         '<tr><td>4XL</td><td>56 cm</td><td>67 cm</td><td>80 cm</td></tr>' +
       '</tbody>' +
-    '</table></div>' +
-    '<p class="sm-copyright">Upozornění: Motivy – obrázky na našich tričkách jsou chráněné autorským právem. Jsou výsledkem naší vlastní tvorby a bez našeho souhlasu je zakázáno je kopírovat, upravovat nebo dále šířit. Děkujeme, že respektujete naši práci.</p>';
+    '</table></div>';
+
+  var SC_MIKINY =
+    '<h4 class="sm-h">Dětské mikiny</h4>' +
+    '<p class="sm-note">Rozměry jsou orientační – doporučujeme přeměřit.</p>' +
+    '<div class="sm-tablewrap"><table class="sm-table">' +
+      '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka rukávu</th><th>Celková délka</th></tr></thead>' +
+      '<tbody>' +
+        '<tr><td>3/4 let</td><td>33 cm</td><td>35 cm</td><td>39 cm</td><td>45 cm</td></tr>' +
+        '<tr><td>5/6 let</td><td>36 cm</td><td>41 cm</td><td>42 cm</td><td>50 cm</td></tr>' +
+        '<tr><td>7/8 let</td><td>38 cm</td><td>43 cm</td><td>48 cm</td><td>56 cm</td></tr>' +
+        '<tr><td>9/10 let</td><td>39 cm</td><td>44 cm</td><td>51 cm</td><td>60 cm</td></tr>' +
+        '<tr><td>11/12 let</td><td>42 cm</td><td>47 cm</td><td>56 cm</td><td>65 cm</td></tr>' +
+      '</tbody>' +
+    '</table></div>';
+
+  function sizeChartHTML() {
+    var h1 = document.querySelector('.p-detail h1, h1[itemprop="name"], h1');
+    var name = (h1 ? h1.textContent : '').toLowerCase();
+    if (/mikin/.test(name)) return SC_MIKINY + SC_COPYRIGHT;
+    return SC_TRICKA + SC_COPYRIGHT; // výchozí: trička
+  }
 
   function initSizeChart() {
     if (document.getElementById('size-chart-btn')) return;
@@ -233,7 +256,7 @@
       '<div class="sm-inner">' +
         '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
         '<h3>Tabulka velikostí</h3>' +
-        SIZE_CHART_HTML +
+        sizeChartHTML() +
       '</div>';
     document.body.appendChild(ov);
     function close() { ov.remove(); document.removeEventListener('keydown', onEsc); }

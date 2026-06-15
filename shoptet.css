@@ -102,6 +102,9 @@ body.in-registrace{background:#fff!important}
 .discount-coupon:not(.uplatneno) form{display:block;margin-top:0}
 .kupon-odkaz{display:none}
 
+/* Kulatá fotka v boxu "Potřebujete pomoc?" (kontakt v košíku) */
+.contact-box img,.contact-box>img{border-radius:100px!important}
+
 /* === 5) Mobil ========================================================== */
 @media(max-width:767px){
   .reg-ucet,.co-registration.box-bg-transparent{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:6px!important}

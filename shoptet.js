@@ -259,6 +259,7 @@
           '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
         '</div>' +
         '<div class="sm-body">' + sizeChartHTML() + '</div>' +
+        '<div class="sm-foot"><button class="sm-close sm-foot-btn" type="button">Zavřít</button></div>' +
       '</div>';
     document.body.appendChild(ov);
     document.documentElement.classList.add('sm-lock');

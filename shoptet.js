@@ -177,6 +177,52 @@
       .catch(function () {});
   }
 
+  /* === D) Tabulka velikostí u textilu (modal) ========================== */
+  // Obrázek tabulky – sem dát finální URL (např. z GitHubu nebo Shoptet souborů)
+  var SIZE_CHART_IMG = 'https://czdsgnr.github.io/shoptet-protvoreni/tabulka-velikosti.jpg';
+
+  function initSizeChart() {
+    var detail = document.querySelector('.p-detail, [data-testid="productDetail"], #product-detail');
+    if (!detail) return;
+    if (document.getElementById('size-chart-btn')) return;
+    // najdi popisek varianty obsahující "VELIKOST" (jen sizovaný textil)
+    var els = detail.querySelectorAll('label, legend, p, strong, span, .variant-name, .parameter-name');
+    var target = null;
+    for (var i = 0; i < els.length; i++) {
+      var t = (els[i].textContent || '').trim();
+      if (t.length < 70 && /VELIKOST/i.test(t)) { target = els[i]; break; }
+    }
+    if (!target) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = 'size-chart-btn';
+    btn.className = 'size-chart-btn';
+    btn.innerHTML = '📏 Tabulka velikostí';
+    target.parentNode.insertBefore(btn, target.nextSibling);
+    btn.addEventListener('click', openSizeModal);
+  }
+
+  function openSizeModal() {
+    if (document.getElementById('size-modal')) return;
+    var ov = document.createElement('div');
+    ov.id = 'size-modal';
+    ov.innerHTML =
+      '<div class="sm-inner">' +
+        '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
+        '<h3>Tabulka velikostí</h3>' +
+        '<img src="' + SIZE_CHART_IMG + '" alt="Tabulka velikostí" ' +
+        'onerror="this.style.display=\'none\';this.nextSibling.style.display=\'block\'">' +
+        '<p class="sm-fallback" style="display:none">Tabulka velikostí se připravuje.</p>' +
+      '</div>';
+    document.body.appendChild(ov);
+    function close() { ov.remove(); document.removeEventListener('keydown', onEsc); }
+    function onEsc(e) { if (e.key === 'Escape') close(); }
+    ov.addEventListener('click', function (e) {
+      if (e.target === ov || e.target.classList.contains('sm-close')) close();
+    });
+    document.addEventListener('keydown', onEsc);
+  }
+
   /* Admin panel pro výběr upsellů – aktivace přes ?upsell-admin v URL */
   function maybeLoadUpsellAdmin() {
     if (!/[?&]upsell-admin/.test(location.search)) return;
@@ -189,6 +235,7 @@
   function initAll() {
     buildLoginExtras();
     initQty();
+    initSizeChart();
   }
 
   if (document.readyState !== 'loading') initAll();
@@ -199,6 +246,10 @@
   window.addEventListener('load', initQty);
   setTimeout(initQty, 800);
   setTimeout(initQty, 2000);
+  // tabulka velikostí – varianty se renderují později
+  setTimeout(initSizeChart, 800);
+  setTimeout(initSizeChart, 2000);
+  document.addEventListener('ShoptetMessage', initSizeChart);
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-target="login"]')) {
       setTimeout(buildLoginExtras, 50);

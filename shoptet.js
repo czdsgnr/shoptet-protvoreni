@@ -178,8 +178,21 @@
   }
 
   /* === D) Tabulka velikostí u textilu (modal) ========================== */
-  // Obrázek tabulky – sem dát finální URL (např. z GitHubu nebo Shoptet souborů)
-  var SIZE_CHART_IMG = 'https://czdsgnr.github.io/shoptet-protvoreni/tabulka-velikosti.jpg';
+  var SIZE_CHART_HTML =
+    '<p class="sm-note">Velikost motivu na tričku: cca <strong>23 × 19 cm</strong> (výška × šířka).</p>' +
+    '<h4 class="sm-h">Dětská trička</h4>' +
+    '<div class="sm-tablewrap"><table class="sm-table">' +
+      '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka</th></tr></thead>' +
+      '<tbody>' +
+        '<tr><td>3/4 let</td><td>27 cm</td><td>31,5 cm</td><td>43 cm</td></tr>' +
+        '<tr><td>5/6 let</td><td>29 cm</td><td>33 cm</td><td>48 cm</td></tr>' +
+        '<tr><td>7/8 let</td><td>31 cm</td><td>36 cm</td><td>52,5 cm</td></tr>' +
+        '<tr><td>9/10 let</td><td>35 cm</td><td>41 cm</td><td>57 cm</td></tr>' +
+        '<tr><td>11/12 let</td><td>36 cm</td><td>42 cm</td><td>60 cm</td></tr>' +
+      '</tbody>' +
+    '</table></div>' +
+    '<h4 class="sm-h">Dospělá trička</h4>' +
+    '<p class="sm-note">Rozměry brzy doplníme.</p>';
 
   function initSizeChart() {
     if (document.getElementById('size-chart-btn')) return;
@@ -206,9 +219,7 @@
       '<div class="sm-inner">' +
         '<button class="sm-close" type="button" aria-label="Zavřít">✕</button>' +
         '<h3>Tabulka velikostí</h3>' +
-        '<img src="' + SIZE_CHART_IMG + '" alt="Tabulka velikostí" ' +
-        'onerror="this.style.display=\'none\';this.nextSibling.style.display=\'block\'">' +
-        '<p class="sm-fallback" style="display:none">Tabulka velikostí se připravuje.</p>' +
+        SIZE_CHART_HTML +
       '</div>';
     document.body.appendChild(ov);
     function close() { ov.remove(); document.removeEventListener('keydown', onEsc); }

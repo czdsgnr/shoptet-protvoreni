@@ -106,8 +106,8 @@ body.in-registrace{background:#fff!important}
 .contact-box img,.contact-box>img{border-radius:100px!important}
 
 /* Tabulka velikostí – tlačítko + modal */
-.size-chart-btn{display:inline-flex;align-items:center;gap:6px;margin:6px 0 14px;padding:7px 14px;border:1.5px solid #1f6fb2;border-radius:9px;background:#eef5fc;color:#1f6fb2;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
-.size-chart-btn:hover{background:#1f6fb2;color:#fff}
+.size-chart-btn{display:inline-flex;align-items:center;gap:7px;margin:4px 0 16px;padding:9px 15px;border:1px solid #d7e2ef;border-radius:8px;background:#fff;color:#1f6fb2;font-size:13px;font-weight:700;line-height:1;cursor:pointer;box-shadow:0 1px 2px rgba(16,34,59,.05);transition:border-color .15s,background .15s}
+.size-chart-btn:hover{border-color:#1f6fb2;background:#f4f9fe}
 #size-modal{position:fixed;inset:0;z-index:2147483000;background:rgba(16,34,59,.55);display:flex;align-items:center;justify-content:center;padding:20px}
 #size-modal .sm-inner{position:relative;background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.4);max-width:760px;width:100%;max-height:90vh;overflow:auto;padding:24px}
 #size-modal h3{margin:0 0 14px;font-size:20px;font-weight:800;color:#16223b}
@@ -123,6 +123,15 @@ body.in-registrace{background:#fff!important}
 #size-modal .sm-table td:first-child{font-weight:700;color:#16223b}
 #size-modal .sm-table tbody tr:hover{background:#fafbfd}
 #size-modal .sm-copyright{margin:18px 0 0;padding-top:14px;border-top:1px solid #eef1f6;font-size:12px;line-height:1.5;color:#9aa7b8}
+/* Mobil – bottom sheet (vyjede zespoda) */
+@keyframes sm-slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(max-width:600px){
+  #size-modal{align-items:flex-end;padding:0}
+  #size-modal .sm-inner{max-width:100%;width:100%;max-height:88vh;border-radius:20px 20px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom));animation:sm-slideup .26s cubic-bezier(.22,.61,.36,1)}
+  #size-modal .sm-inner::before{content:"";display:block;width:40px;height:4px;border-radius:3px;background:#dfe4ec;margin:-6px auto 14px}
+  #size-modal h3{font-size:18px;padding-right:40px}
+  #size-modal .sm-close{top:14px;right:14px}
+}
 
 /* === 5) Mobil ========================================================== */
 @media(max-width:767px){

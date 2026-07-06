@@ -245,6 +245,8 @@
     var h1 = document.querySelector('.p-detail h1, h1[itemprop="name"], h1');
     var pname = (h1 ? h1.textContent : '').toLowerCase();
     if (/na[žz]ehlova|dtf/.test(pname)) return;
+    // Mikiny – zatím skryto (chybí rozměry dospělých mikin). Až budou data, řádek odeber.
+    if (/mikin/.test(pname)) return;
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.id = 'size-chart-btn';

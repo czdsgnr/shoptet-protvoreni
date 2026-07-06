@@ -221,7 +221,8 @@
         '<tr><td>9/10 let</td><td>39 cm</td><td>44 cm</td><td>51 cm</td><td>60 cm</td></tr>' +
         '<tr><td>11/12 let</td><td>42 cm</td><td>47 cm</td><td>56 cm</td><td>65 cm</td></tr>' +
       '</tbody>' +
-    '</table></div>';
+    '</table></div>' +
+    '<p class="sm-note sm-flat">Rozměry mikiny jsou měřeny na plocho. Pro orientační obvod hrudníku je potřeba uvedenou šířku (přes bříško) vynásobit dvěma.</p>';
 
   function sizeChartHTML() {
     var h1 = document.querySelector('.p-detail h1, h1[itemprop="name"], h1');

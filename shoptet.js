@@ -183,7 +183,6 @@
 
   var SC_TRICKA =
     '<h4 class="sm-h">Dětská trička</h4>' +
-    '<p class="sm-note">Velikost motivu: cca <strong>23 × 19 cm</strong> (výška × šířka).</p>' +
     '<div class="sm-tablewrap"><table class="sm-table">' +
       '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka</th></tr></thead>' +
       '<tbody>' +
@@ -195,7 +194,6 @@
       '</tbody>' +
     '</table></div>' +
     '<h4 class="sm-h">Dospělá trička</h4>' +
-    '<p class="sm-note">Velikost motivu: cca <strong>19 × 18 cm</strong> (výška × šířka).</p>' +
     '<div class="sm-tablewrap"><table class="sm-table">' +
       '<thead><tr><th>Velikost</th><th>Šířka ramen</th><th>Šířka přes bříško</th><th>Délka</th></tr></thead>' +
       '<tbody>' +
@@ -208,7 +206,8 @@
         '<tr><td>3XL</td><td>55 cm</td><td>66 cm</td><td>80 cm</td></tr>' +
         '<tr><td>4XL</td><td>56 cm</td><td>67 cm</td><td>80 cm</td></tr>' +
       '</tbody>' +
-    '</table></div>';
+    '</table></div>' +
+    '<p class="sm-note sm-flat">Rozměry trička jsou měřeny na plocho. Pro orientační obvod hrudníku je potřeba uvedenou šířku vynásobit dvěma.</p>';
 
   var SC_MIKINY =
     '<h4 class="sm-h">Dětské mikiny</h4>' +
@@ -239,6 +238,10 @@
     var hasSize = /VELIKOST/i.test(params.textContent) ||
       params.querySelector('[data-parameter-name*="VELIKOST"], [data-parameter-name*="velikost"]');
     if (!hasSize) return;
+    // DTF nažehlovačky – tabulka velikostí triček tam nepatří
+    var h1 = document.querySelector('.p-detail h1, h1[itemprop="name"], h1');
+    var pname = (h1 ? h1.textContent : '').toLowerCase();
+    if (/na[žz]ehlova|dtf/.test(pname)) return;
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.id = 'size-chart-btn';

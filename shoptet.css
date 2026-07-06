@@ -137,6 +137,7 @@ html.sm-lock,html.sm-lock body{overflow:hidden!important}
 #size-modal .sm-table th{background:#f1f4f9;font-weight:700;color:#33415a;white-space:nowrap}
 #size-modal .sm-table td:first-child{font-weight:700;color:#16223b}
 #size-modal .sm-table tbody tr:hover{background:#fafbfd}
+#size-modal .sm-flat{margin-top:14px;color:#5a6b7e;font-style:italic}
 #size-modal .sm-copyright{margin:18px 0 0;padding-top:14px;border-top:1px solid #eef1f6;font-size:12px;line-height:1.5;color:#9aa7b8}
 /* Mobil – bottom sheet (vyjede zespoda) */
 @keyframes sm-slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
